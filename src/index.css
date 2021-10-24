@@ -1,0 +1,41 @@
+/* background-color: #0abcf9; */
+/* background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%); */
+/* background-image: linear-gradient(315deg, #090979 0%, #2c81ed 74%); */
+
+/* .background{
+  background-color: #090979;
+  background-image: linear-gradient(300deg, #090979 0%, #2c81ed 74%)
+} */
+.drag{
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.background{
+  background-color: rgb(17,24,39);
+  background-image: linear-gradient(45deg, rgba(17,24,39,1) 0%, rgba(13,23,78,1) 100%);
+  
+}
+
+#start-minecraft{
+  background-color: rgb(29, 53, 192);
+  transition: all 0.4s;
+}
+#start-minecraft:hover{
+  background-color: rgb(27, 44, 139);
+}
+
+.btn-scale{
+  transition: background-color 0.4s;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}

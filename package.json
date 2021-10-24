@@ -1,0 +1,67 @@
+{
+  "name": "minecraft-launcher",
+  "productName": "minecraft-launcher",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": "Joaquin",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "minecraft_launcher"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "aio-mc-api": "^1.2.4",
+    "axios": "^0.23.0",
+    "bee-mod-parser": "^1.2.2",
+    "custom-electron-titlebar": "^3.2.7",
+    "electron-dl": "^3.2.1",
+    "electron-json-storage": "^4.5.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "find-java-home": "^1.2.2",
+    "googleapis": "^88.2.0",
+    "minecraft-launcher-core": "^3.16.8",
+    "minecraft-pinger": "^1.0.5",
+    "minecraft-server-util": "^3.6.1",
+    "node-process-windows": "0.0.2"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "electron": "15.1.2"
+  }
+}

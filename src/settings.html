@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Launcher</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <script defer src="settings.js"></script>
+</head>
+
+<body class="background h-screen">
+  <section class="text-gray-400 body-font flex flex-col h-4/5 mx-2">
+    <h1 class="title-font sm:text-4xl text-3xl my-4 font-medium text-white text-center">Ajustes</h1>
+    <!-- <div class="h-1/4">
+      <label>Directorio de Minecraft</label>
+      <input type=" text" id="minecraftDir">
+      <label id="changeMinecraftDir"><button>Cambiar</button></label>
+      <label id="resetMinecraftDir"><button>Resetear</button></label>
+    </div> -->
+
+    <div class="h-1/4">
+      <label class="font-bold">Server IP:</label>
+      <input type="text" id="serverIP" class="text-black ml-2 font-bold pl-2 rounded-2xl">
+      <label id="saveServerIP" class="ml-2"><button
+          class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600">Guardar</button></label>
+    </div>
+    <div>
+      <h2>Configuración del juego</h2>
+      <div class="my-4">
+        <label class="font-bold">Tamaño de ventana</label>
+        <select name="" id="screen-resolution" class="text-black px-2 ml-2">
+          <option value="full" id="full">Pantalla Completa</option>
+          <option value="720p" id="720p">1280x720</option>
+          <option value="default" id="default">Por Defecto</option>
+        </select>
+
+        <label id="save-screen-resolution" class="ml-2"><button
+            class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600">Guardar</button></label>
+      </div>
+
+      <div id="ram-div" class="my-4 flex items-center">
+
+      </div>
+
+    </div>
+    <a href="index.html">Home</a>
+  </section>
+
+</body>
+
+</html>
