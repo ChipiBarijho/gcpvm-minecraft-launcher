@@ -426,7 +426,7 @@ storage.has('minecraft', function (error, hasKey) {
                     console.log(data.toString());
                 });
             }
-            setTimeout(async function () { await installJre(); }, 60000);
+            setTimeout(async function () { installJre(); }, 60000);
 
 
         });
