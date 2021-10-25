@@ -438,7 +438,6 @@ storage.has('minecraft', function (error, hasKey) {
         });
         ipcRenderer.on("customSkinLoader-downloaded", (event, data) => {
             console.log('customSkinLoader downloaded')
-            // ipcRenderer.send('force-reload')
         });
 
         // console.log(env)
@@ -562,7 +561,7 @@ storage.has('minecraft', function (error, hasKey) {
                                                 }
                                                 async function startMinecraftGame() {
                                                     console.log(opts)
-                                                    launcher.launch(opts);
+                                                    await launcher.launch(opts);
                                                 }
                                                 startMinecraftGame().then(res => {
                                                     console.log('starting minecraft')
