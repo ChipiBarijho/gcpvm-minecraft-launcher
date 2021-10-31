@@ -31,9 +31,9 @@
         src="./minecraft.jpg">
       <div class="text-center w-full h-80 flex flex-col justify-between">
         <div id="server-status-div" class="">
-          <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Bienvenido!</h1>
+          <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Welcome!</h1>
           <div class="flex justify-center items-center">
-            <h2 id="server-status">Estado del Servidor: <span class="font-bold mr-2">CARGANDO </span></h2>
+            <h2 id="server-status">Server Status: <span class="font-bold mr-2">Loading </span></h2>
             <img src="./tail-spin.svg" alt="" id="server-status-spinner">
             <div id="ping" class="hidden ml-5"></div>
           </div>
@@ -43,15 +43,12 @@
           </div>
         </div>
         <!-- Buttons  -->
-        <div id="incomplete-settings" class="font-bold text-red-400 text-sm hidden">Te faltan configurar ajustes. RAM o
-          Nombre de
-          Usuario.
+        <div id="incomplete-settings" class="font-bold text-red-400 text-sm hidden">You need to finish setting up your username or RAM allocation
         </div>
         <div class="flex justify-center justify-self-end" id="buttons-div">
 
           <button id="start-minecraft"
-            class="m-4 inline-flex text-white font-bold border-0 py-2 px-6 focus:outline-none rounded-2xl text-lg">Entrar
-            al Server</button>
+            class="m-4 inline-flex text-white font-bold border-0 py-2 px-6 focus:outline-none rounded-2xl text-lg">Enter Minecraft Server</button>
 
           <div id="server-controls-container" class="">
           </div>
@@ -64,11 +61,11 @@
     <div class="border-t border-opacity-5 w-full h-20 hidden flex flex-col items-center justify-around" id="bottom-box">
       <div class="w-full">
         <div id="download-mods-div" class="hidden flex items-center justify-center">
-          <p class="hidden" id="text-update-mods">Necesitas actualizar tus mods!</p>
+          <p class="hidden" id="text-update-mods">Update your mods!</p>
           <button id="download-mods-button" class=""></button>
         </div>
         <div id="loading-mods-div" class="flex justify-center">
-          <p class="font-bold mr-2">Cargando mods ...</p>
+          <p class="font-bold mr-2">Loading mods ...</p>
           <img src="./tail-spin.svg" alt="" id="loading-mods-spinner">
         </div>
       </div>
@@ -84,7 +81,7 @@
 
   <!-- SETTINGS PAGE -->
   <section class="text-gray-400 body-font flex flex-col h-4/5 mx-2 hidden" id="settings-page">
-    <h1 class="title-font sm:text-4xl text-3xl mt-4 mb-8 font-medium text-white text-center">Ajustes</h1>
+    <h1 class="title-font sm:text-4xl text-3xl mt-4 mb-8 font-medium text-white text-center">Settings</h1>
 
     <div class="h-1/4 mb-6 flex">
       <div>
@@ -93,10 +90,10 @@
       </div>
 
       <label id="saveServerIP" class="ml-2"><button
-          class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Guardar</button></label>
+          class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Save</button></label>
     </div>
     <div class="my-6">
-      <h2 class="title-font text-xl mb-4 font-medium text-white text-center">Configuración del juego</h2>
+      <h2 class="title-font text-xl mb-4 font-medium text-white text-center">Game Settings</h2>
       <!-- <div class="my-2">
         <label class="font-bold">Tamaño de ventana</label>
         <select name="" id="screen-resolution" class="text-black px-2 ml-2">
@@ -116,12 +113,12 @@
     </div>
 
     <div class="my-5">
-      <h2 class="title-font text-xl mb-4 font-medium text-white text-center">Configuración de Usuario</h2>
+      <h2 class="title-font text-xl mb-4 font-medium text-white text-center">User Settings</h2>
       <div class="my-4">
-        <label class="font-bold">Nombre de Usuario</label>
+        <label class="font-bold">Username</label>
         <input type="text" id="username" class="text-black ml-2 font-bold pl-2 rounded-2xl">
         <label id="saveUsername" class="ml-2"><button
-            class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Guardar</button></label>
+            class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Save</button></label>
       </div>
       <div class="my-4" id="upload-skin-div">
 
@@ -131,11 +128,11 @@
           -->
       </div>
     </div>
-    <div class="flex hover:text-white items-center h-20 w-20">
+    <div class="flex hover:text-white items-center h-20 w-24">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
       </svg>
-      <a href="#" id="go-back" class="hover:text-white font-bold ml-px">Volver</a>
+      <a href="#" id="go-back" class="hover:text-white font-bold ml-px">Go Back</a>
     </div>
 
   </section>

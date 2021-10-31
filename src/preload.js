@@ -45,7 +45,7 @@ function getPing(serverIp) {
             // Disable enter server button because server is offline 
             document.getElementById('start-minecraft').disabled = true
             // Server status div
-            document.getElementById('server-status').innerHTML = 'Estado del Servidor: <span class="text-red-500 font-bold" id="span">OFFLINE</span>'
+            document.getElementById('server-status').innerHTML = 'Server Status: <span class="text-red-500 font-bold" id="span">OFFLINE</span>'
             // Remove and add various CSS classes that come from server being online
             document.getElementById('span').classList.remove('online')
             document.getElementById('ping').classList.remove('block')
@@ -81,10 +81,10 @@ function getPing(serverIp) {
                     if (resStatus == 'TERMINATED') {
                         const serverControlsContainer = document.getElementById('server-controls-container')
                         // This is in case STOP SERVER button was clicked so ui for server status needs to change AND a start server button needs to be added now
-                        if (serverControlsContainer.innerText == 'Stop Server' || serverControlsContainer.innerText == 'Apagando') {
+                        if (serverControlsContainer.innerText == 'Stop Server' || serverControlsContainer.innerText == 'Shutting Down') {
                             document.getElementById('stop-button').remove()
                             const startButton = document.createElement('button')
-                            startButton.innerHTML = 'Iniciar Server'
+                            startButton.innerHTML = 'Turn Server On'
                             startButton.setAttribute('id', 'start-button');
                             startButton.classList.add('btn-scale', 'rounded-2xl', 'm-4', 'inline-flex', 'text-white', 'font-bold', 'bg-green-500', 'border-0', 'py-2', 'px-6', 'focus:outline-none', 'hover:bg-green-600', 'rounded', 'text-lg')
                             serverControlsContainer.appendChild(startButton)
@@ -94,7 +94,7 @@ function getPing(serverIp) {
                         // This is in case the application was just launched and the minecraft server is offline, so a start button is added 
                         if (serverControlsContainer.innerText == '') {
                             const startButton = document.createElement('button')
-                            startButton.innerHTML = 'Iniciar Server'
+                            startButton.innerHTML = 'Turn Server On'
                             startButton.setAttribute('id', 'start-button');
                             startButton.classList.add('btn-scale', 'rounded-2xl', 'm-4', 'inline-flex', 'text-white', 'font-bold', 'bg-green-500', 'border-0', 'py-2', 'px-6', 'focus:outline-none', 'hover:bg-green-600', 'rounded', 'text-lg')
                             serverControlsContainer.appendChild(startButton)
@@ -109,7 +109,7 @@ function getPing(serverIp) {
                             spinner.classList.add('ml-4')
                             startButton.classList.add('cursor-not-allowed', 'opacity-70')
                             startButton.classList.remove('hover:bg-green-600')
-                            startButton.innerHTML = 'Prendiendo'
+                            startButton.innerHTML = 'Starting Server'
                             startButton.appendChild(spinner)
                             authorize(function (authClient) {
 
@@ -195,7 +195,7 @@ function getPing(serverIp) {
                         // Shows STOP BUTTON to stop VM INSTANCE IN GCP if there are not any players online
                         if (result.players.online === 0) {
                             // document.getElementById('stop-button').classList.add('hidden')
-                            if (serverControlsContainer.innerText == 'Prender Server' || serverControlsContainer.innerText == 'Prendiendo') {
+                            if (serverControlsContainer.innerText == 'Turn Server On' || serverControlsContainer.innerText == 'Starting Server') {
                                 document.getElementById('start-button').remove()
                                 const stopButton = document.createElement('button')
                                 stopButton.innerHTML = 'Stop Server'
@@ -259,7 +259,7 @@ function getPing(serverIp) {
                                         spinner.classList.add('ml-4', 'inline-flex')
                                         stopButton.classList.add('cursor-not-allowed', 'opacity-70')
                                         stopButton.classList.remove('hover:bg-red-600')
-                                        stopButton.innerHTML = 'Apagando'
+                                        stopButton.innerHTML = 'Shutting Down'
                                         stopButton.appendChild(spinner)
                                     });
                                 });
@@ -287,7 +287,7 @@ function getPing(serverIp) {
                 });
             }
             // Server status div
-            document.getElementById('server-status').innerHTML = 'Estado del Servidor: <span class="font-bold text-green-500" id="span">ONLINE</span>'
+            document.getElementById('server-status').innerHTML = 'Server Status: <span class="font-bold text-green-500" id="span">ONLINE</span>'
             document.getElementById('span').classList.remove('offline')
             document.getElementById('ping').classList.remove('hidden')
             document.getElementById('ping').classList.add('block')
@@ -308,9 +308,9 @@ function getPing(serverIp) {
             let h3 = document.createElement('h3')
 
             if (result.players.online == 0) {
-                h3.innerHTML = 'No hay jugadores online'
+                h3.innerHTML = 'No players online'
             } else {
-                h3.innerHTML = 'Jugadores online'
+                h3.innerHTML = 'Online players'
             }
 
             h3.classList.add('mt-4', 'font-bold',)
@@ -467,7 +467,7 @@ storage.has('minecraft', function (error, hasKey) {
         storage.has('minecraftServerIp', function (error, hasKey) {
             if (error) throw error;
             if (!hasKey) {
-                document.getElementById('server-status').innerHTML = '<div> <label>Por favor introduzca IP del servidor</label> <input type="text" id="serverIP" class="py-1 ml-2 rounded"> <label id="saveServerIP"><button class="ml-2 inline-flex text-white font-bold bg-green-500 border-0 py-1 px-2 focus:outline-none hover:bg-green-600 rounded" id="save-ip-button">Guardar</button></label><img src="./tail-spin.svg" class="hidden" id="save-ip-spinner"></div>'
+                document.getElementById('server-status').innerHTML = `<div> <label>Please type the server's IP</label> <input type="text" id="serverIP" class="py-1 ml-2 rounded"> <label id="saveServerIP"><button class="ml-2 inline-flex text-white font-bold bg-green-500 border-0 py-1 px-2 focus:outline-none hover:bg-green-600 rounded" id="save-ip-button">Save</button></label><img src="./tail-spin.svg" class="hidden" id="save-ip-spinner"></div>`
                 document.getElementById('server-status-spinner').classList.add('hidden')
                 document.getElementById('start-minecraft').classList.add('hidden')
                 document.getElementById('saveServerIP').addEventListener('click', function () {
@@ -582,7 +582,7 @@ storage.has('minecraft', function (error, hasKey) {
                                                 const spinner = document.createElement('img')
                                                 spinner.setAttribute('src', './tail-spin.svg')
                                                 spinner.classList.add('ml-4', 'inline-flex')
-                                                startMinecraft.innerText = 'Entrando al Server'
+                                                startMinecraft.innerText = 'Entering Server'
                                                 startMinecraft.classList.add('cursor-not-allowed', 'opacity-70')
                                                 startMinecraft.appendChild(spinner)
                                                 // Start Minecraft 
@@ -693,13 +693,13 @@ storage.has('minecraft', function (error, hasKey) {
                                                             updateBtn.disabled = false
                                                             document.getElementById('text-update-mods').classList.remove('hidden')
                                                             document.getElementById('text-update-mods').classList.add('font-bold', 'text-red-400', 'mr-2')
-                                                            updateBtn.innerHTML = 'Actualizar Mods'
+                                                            updateBtn.innerHTML = 'Update Mods'
                                                             updateBtn.classList.add('btn-scale', 'rounded-2xl', 'inline-flex', 'text-gray-800', 'font-bold', 'bg-yellow-400', 'border-0', 'py-1', 'px-4', 'focus:outline-none', 'hover:bg-yellow-500', 'rounded', 'text-lg', 'uppercase')
                                                         } else {
                                                             updateBtn.classList.add('hidden')
                                                             document.getElementById('text-update-mods').classList.remove('hidden')
                                                             document.getElementById('text-update-mods').classList.add('font-bold', 'text-green-300')
-                                                            document.getElementById('text-update-mods').innerHTML = 'Actualizado!'
+                                                            document.getElementById('text-update-mods').innerHTML = 'Mods Up To Date'
                                                         }
 
                                                         document.getElementById('download-mods-button').addEventListener('click', function () {
@@ -709,7 +709,7 @@ storage.has('minecraft', function (error, hasKey) {
                                                             spinner.classList.add('ml-4', 'inline-flex')
                                                             updateBtn.classList.add('cursor-not-allowed', 'opacity-70')
                                                             updateBtn.classList.remove('hover:bg-yellow-500')
-                                                            updateBtn.innerHTML = 'Descargando'
+                                                            updateBtn.innerHTML = 'Downloading'
                                                             updateBtn.appendChild(spinner)
                                                             ipcRenderer.send('download-items', { files: filesToDownload, directory: clientModsDirectory })
                                                             updateBtn.disabled = true
@@ -796,7 +796,7 @@ ipcRenderer.on("download-complete", (event, file) => {
 
     document.getElementById('download-mods-button').classList.add('hidden')
     document.getElementById('text-update-mods').classList.add('font-bold', 'text-green-300')
-    document.getElementById('text-update-mods').innerHTML = 'Actualizado!'
+    document.getElementById('text-update-mods').innerHTML = 'Mods updated!'
     // console.log(file); // Full file path
 });
 
@@ -866,10 +866,10 @@ storage.has('minecraftServerIp', function (error, hasKey) {
                 // create form to post skin to server
                 uploadSkinDiv.innerHTML = `<form action="http://${data.minecraftServerIp.serverIp}:25580/skins" method="post" enctype="multipart/form-data">
                 <label class="font-bold" for="skin">Skin</label>
-                <label id="label-skin" class="ml-2 px-2 cursor-pointer border-solid border border-gray-300 rounded-2xl bg-white" for="skin">Seleccionar archivo...</label>
+                <label id="label-skin" class="ml-2 px-2 cursor-pointer border-solid border border-gray-300 rounded-2xl bg-white" for="skin">Select file...</label>
                 <input type="file" id="skin" name="skins">
                 <input name="username" id="username" value="${data.user.username}" class="hidden">
-                <input type="submit" value="Subir" id="save-skin" class="text-white font-bold border-0 px-2 focus:outline-none
+                <input type="submit" value="Upload" id="save-skin" class="text-white font-bold border-0 px-2 focus:outline-none
                 rounded-2xl bg-green-500 hover:bg-green-600 ml-2 cursor-not-allowed opacity-70">
                 </form>`
 
@@ -900,7 +900,7 @@ storage.has('minecraftServerIp', function (error, hasKey) {
             } else {
                 uploadSkinDiv.innerHTML = `<form action="http://${data.minecraftServerIp.serverIp}:25580/skins" method="post" enctype="multipart/form-data">
                 <label class="font-bold" for="skin">Skin</label>
-                <div>Necesitas iniciar Minecraft una vez para poder subir tu skin!</div>
+                <div>You need to start Minecraft at least once to upload your skin</div>
                 </form>`
             }
         });
@@ -986,7 +986,7 @@ storage.has('ram', function (error, hasKey) {
           oninput="this.nextElementSibling.value = this.value">
         <output id="ram-range-output" class="ml-2">4000</output><output class="ml-1">MB</output>
         <label id="save-ram" class="ml-2"><button
-            class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Guardar</button></label></div>`
+            class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Save</button></label></div>`
 
 
         const saveRam = document.getElementById('save-ram')
@@ -1009,7 +1009,7 @@ storage.has('ram', function (error, hasKey) {
               oninput="this.nextElementSibling.value = this.value">
             <output id="ram-range-output" class="ml-2">${data.max}</output><output class="ml-1">MB</output>
             <label id="save-ram" class="ml-2"></div><button
-                class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Guardar</button></label>`
+                class="text-white font-bold border-0 px-2 focus:outline-none rounded-2xl bg-green-500 hover:bg-green-600 ml-4">Save</button></label>`
 
             const saveRam = document.getElementById('save-ram')
 
