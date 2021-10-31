@@ -1,4 +1,4 @@
-process.env.GOOGLE_APPLICATION_CREDENTIALS = './src/vivid-science-327616-2a2c0443fda6.json'
+process.env.GOOGLE_APPLICATION_CREDENTIALS = // JSON file from GCP with service account credentials
 const { app, BrowserWindow, BrowserView, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
