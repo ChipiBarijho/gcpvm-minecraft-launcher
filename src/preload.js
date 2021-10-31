@@ -513,7 +513,7 @@ storage.has('minecraft', function (error, hasKey) {
                             if (result) {
                                 storage.get('minecraft', function (error, data2) {
                                     if (error) console.error
-                                    storage.getMany(['ram', 'screenResolution', 'user'], function (error, settingsData) {
+                                    storage.getMany(['ram', 'screenResolution', 'user', 'start'], function (error, settingsData) {
                                         if (error) console.error
                                         // console.log(settingsData.user)
                                         if (!settingsData.ram.max || !settingsData.user.username) {
@@ -559,6 +559,7 @@ storage.has('minecraft', function (error, hasKey) {
                                                         port: '25565'
                                                     }
                                                 }
+                                                
                                                 async function startMinecraftGame() {
                                                     console.log(opts)
                                                     await launcher.launch(opts);
@@ -568,7 +569,7 @@ storage.has('minecraft', function (error, hasKey) {
                                                     function closeWindow() {
                                                         window.close()
                                                     }
-                                                    setTimeout(function () { closeWindow(); }, 30000);
+                                                    setTimeout(function () { closeWindow(); }, 15000);
                                                 }).catch(e => {
                                                     console.log(e)
                                                 })
@@ -608,7 +609,6 @@ storage.has('minecraft', function (error, hasKey) {
                                     })
                                         .then((res) => {
                                             const serverMods = []
-
                                             res.data.forEach(mod => {
                                                 serverMods.push(mod)
                                             })
@@ -792,7 +792,7 @@ ipcRenderer.on("download progress", (event, progress) => {
     // console.log(cleanProgressInPercentages)
 });
 
-ipcRenderer.on("download complete", (event, file) => {
+ipcRenderer.on("download-complete", (event, file) => {
 
     document.getElementById('download-mods-button').classList.add('hidden')
     document.getElementById('text-update-mods').classList.add('font-bold', 'text-green-300')
@@ -866,12 +866,36 @@ storage.has('minecraftServerIp', function (error, hasKey) {
                 // create form to post skin to server
                 uploadSkinDiv.innerHTML = `<form action="http://${data.minecraftServerIp.serverIp}:25580/skins" method="post" enctype="multipart/form-data">
                 <label class="font-bold" for="skin">Skin</label>
-                <label class="ml-2 px-2 cursor-pointer border-solid border border-gray-300 rounded-2xl bg-white" for="skin">Seleccionar archivo...</label>
+                <label id="label-skin" class="ml-2 px-2 cursor-pointer border-solid border border-gray-300 rounded-2xl bg-white" for="skin">Seleccionar archivo...</label>
                 <input type="file" id="skin" name="skins">
                 <input name="username" id="username" value="${data.user.username}" class="hidden">
                 <input type="submit" value="Subir" id="save-skin" class="text-white font-bold border-0 px-2 focus:outline-none
-                rounded-2xl bg-green-500 hover:bg-green-600 ml-2 cursor-pointer">
+                rounded-2xl bg-green-500 hover:bg-green-600 ml-2 cursor-not-allowed opacity-70">
                 </form>`
+
+                document.getElementById('save-skin').disabled = true
+
+                document.getElementById('skin').addEventListener('change', function(){
+                    if ( document.getElementById('skin').value != '') {
+                        let filename = this.value
+                        let f = filename.replace(/.*[\/\\]/, '')
+                        // console.log(f)
+                        document.getElementById('label-skin').innerHTML = f
+                        document.getElementById('save-skin').disabled = false
+                        document.getElementById('save-skin').classList.remove('cursor-not-allowed', 'opacity-70')
+                        document.getElementById('save-skin').classList.add('cursor-pointer')
+                    } else {
+                        document.getElementById('save-skin').disabled = true
+                        document.getElementById('save-skin').classList.add('cursor-not-allowed', 'opacity-70')
+                        document.getElementById('save-skin').classList.remove('cursor-pointer')
+                        document.getElementById('label-skin').innerHTML = 'Seleccionar archivo...'
+                    }
+                   
+                })
+                document.getElementById('save-skin').addEventListener('click', function(){
+                    document.getElementById('save-skin').classList.add('cursor-not-allowed', 'opacity-70')
+                    document.getElementById('save-skin').classList.remove('cursor-pointer')
+                })
 
             } else {
                 uploadSkinDiv.innerHTML = `<form action="http://${data.minecraftServerIp.serverIp}:25580/skins" method="post" enctype="multipart/form-data">

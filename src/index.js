@@ -4,9 +4,12 @@ const path = require('path');
 const fs = require('fs');
 var env = process.env
 
+const Queue = require('async-await-queue');
+
 // const electronDl = require('electron-dl');
 
 const { download } = require('electron-dl');
+const { promise } = require('find-java-home');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -59,28 +62,44 @@ const createWindow = () => {
 
   // download mods
   ipcMain.on('download-items', async (event, info) => {
-    // console.log(info.files[0][0])
-    async function fileDownload() {
-      await Promise.all(info.files.map(async file => {
-        if (info.files.length === 1) {
-          download(mainWindow, file[0].downloadUrl, {
-            directory: info.directory
-          })
-            .then(dl => mainWindow.webContents.send("download complete", dl.getSavePath()))
-            .catch(console.error)
-        } else {
-          download(mainWindow, file[0].downloadUrl, {
-            directory: info.directory
-          })
-            .then(dl => mainWindow.webContents.send("download complete", dl.getSavePath()))
-            .catch(console.error)
-        }
-      }))
-    }
-    async function startDownload() {
-      await fileDownload()
-    }
-    startDownload()
+
+    let urls = []
+    info.files.map((file, index) => {
+      if (!file[0]) {
+        // urls[index] = {'url': file.downloadUrl}
+        urls.push(file.downloadUrl)
+      } else {
+        urls.push(file[0].downloadUrl)
+      }
+    })
+    // console.log(urls)
+    
+    
+    const queue = new Queue(10, 100);
+    let p = [];
+
+    urls.forEach(function(value, i){
+      /* Each iteration is an anonymous async function */
+      p.push((async () => {
+          const me = Symbol();
+          await queue.wait(me, 0);
+          try {
+              const html = await download(mainWindow, value,{
+                saveAs: false,
+                directory: info.directory,
+                overwrite: true
+              });
+              // data[url] = parse(html);
+          } catch (e) {
+              console.error(e);
+          } finally {
+              
+              queue.end(me);
+          }
+          
+      })());
+    })
+    await Promise.allSettled(p).then(results => mainWindow.webContents.send("download-complete"));
   });
 
 
