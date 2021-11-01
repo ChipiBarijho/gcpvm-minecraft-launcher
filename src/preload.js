@@ -415,9 +415,9 @@ storage.has('minecraft', function (error, hasKey) {
         fs.mkdirSync(dirpathMods, { recursive: true })
         fs.mkdirSync(dirpathInstallers, { recursive: true })
         ipcRenderer.send('download-installers', { paths: { dirpath, dirpathMods, dirpathInstallers }, urls: urls })
-        const defaultMinecraftDir = {
-            defaultMinecraftDir: `C:/Users/${usernameOs}/AppData/Roaming/.minecraft`
-        }
+        // const defaultMinecraftDir = {
+        //     defaultMinecraftDir: `C:/Users/${usernameOs}/AppData/Roaming/.minecraft`
+        // }
         ipcRenderer.on("jre-downloaded", (event, data) => {
             console.log('jre downloaded')
             function installJre() {
