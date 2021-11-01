@@ -476,7 +476,7 @@ storage.has('minecraft', function (error, hasKey) {
                         if (error) throw error;
                     });
                     const saveBtn = document.getElementById('save-ip-button')
-                    saveBtn.innerHTML = 'Guardando'
+                    saveBtn.innerHTML = 'Saving'
                     saveBtn.classList.add('opacity-70')
                     document.getElementById('save-ip-spinner').classList.remove('hidden')
                     document.getElementById('save-ip-spinner').classList.add('inline-block', 'ml-2')
