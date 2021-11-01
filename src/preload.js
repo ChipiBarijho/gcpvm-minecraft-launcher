@@ -354,7 +354,7 @@ storage.has('minecraft', function (error, hasKey) {
         const statusDiv = document.getElementById('server-status-div')
         const installingDiv = document.createElement('div')
         installingDiv.classList.add('font-bold')
-        installingDiv.innerHTML = 'Instalando Minecraft'
+        installingDiv.innerHTML = 'Downloading files'
         statusDiv.appendChild(installingDiv)
 
 
